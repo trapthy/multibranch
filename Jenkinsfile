@@ -27,11 +27,11 @@ pipeline {
             }
         }
 
-        // stage('Code Checkout') {
-        //         steps {
-        //          git branch: "${env.BRANCH_NAME}", credentialsId: 'trapthygit', url: 'https://github.com/trapthy/multibranch.git'
-        //     }
-        // }
+        stage('Code Checkout') {
+                steps {
+                 git branch: "$branch_name", credentialsId: 'trapthygit', url: 'https://github.com/trapthy/multibranch.git'
+            }
+        }
 
         stage(' Unit Testing') {
             when {
