@@ -5,13 +5,13 @@ pipeline {
           label "gp-agent"
              }
           }
-    environment{
+    // environment{
 
-    //    branch = "${env.BRANCH_NAME}"
-        branch = "${env.BRANCH_NAME.split("/")[1]}"
+    // //    branch = "${env.BRANCH_NAME}"
+    //     branch = "${env.BRANCH_NAME.split("/")[1]}"
 
 
-    }
+    // }
 
 
     stages {
@@ -20,7 +20,8 @@ pipeline {
             steps {
                 cleanWs()
                 sh """
-                echo "$branch"
+               // echo "$branch"
+                printenv
                 echo "Cleaned Up Workspace For Project"
                 """
             }
@@ -28,7 +29,7 @@ pipeline {
 
         stage('Code Checkout') {
                 steps {
-                 git branch: "${branch}", credentialsId: 'trapthygit', url: 'https://github.com/trapthy/multibranch.git'
+                 git branch: "${env.BRANCH_NAME}", credentialsId: 'trapthygit', url: 'https://github.com/trapthy/multibranch.git'
             }
         }
 
