@@ -26,12 +26,8 @@ pipeline {
         }
 
         stage('Code Checkout') {
-            steps {
-                checkout([
-                    $class: 'GitSCM', 
-                    branches: $branch , 
-                    userRemoteConfigs: [[url: 'https://github.com/trapthy/multibranch.git']]
-                ])
+                steps {
+                 git branch: '$branch', credentialsId: 'trapthygit', url: 'https://github.com/trapthy/multibranch.git'
             }
         }
 
