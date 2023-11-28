@@ -6,9 +6,12 @@ pipeline {
              }
           }
     environment{
-        branch = env.BRANCH_NAME
 
-    }
+       branch_name = "${env.BRANCH_NAME}"
+    //     branch = "${env.BRANCH_NAME.split("/")[1]}"
+
+
+     }
 
 
     stages {
@@ -17,18 +20,16 @@ pipeline {
             steps {
                 cleanWs()
                 sh """
+              
+                echo "$branch_name"
                 echo "Cleaned Up Workspace For Project"
                 """
             }
         }
 
         stage('Code Checkout') {
-            steps {
-                checkout([
-                    $class: 'GitSCM', 
-                    branches: $branch , 
-                    userRemoteConfigs: [[url: 'https://github.com/trapthy/multibranch.git']]
-                ])
+                steps {
+                 git branch: "$branch_name", credentialsId: 'trapthygit', url: 'https://github.com/trapthy/multibranch.git'
             }
         }
 
