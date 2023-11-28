@@ -1,17 +1,18 @@
 pipeline {
 
     agent {
-        node {
-            label 'master'
-        }
-    }
+        label {
+          label "gp-agent"
+             }
+          }
+    environment{
 
-    options {
-        buildDiscarder logRotator( 
-                    daysToKeepStr: '16', 
-                    numToKeepStr: '10'
-            )
-    }
+       branch_name = "${env.BRANCH_NAME}"
+    //     branch = "${env.BRANCH_NAME.split("/")[1]}"
+
+
+     }
+
 
     stages {
         
@@ -19,22 +20,23 @@ pipeline {
             steps {
                 cleanWs()
                 sh """
+              
+                echo "$branch_name"
                 echo "Cleaned Up Workspace For Project"
                 """
             }
         }
 
         stage('Code Checkout') {
-            steps {
-                checkout([
-                    $class: 'GitSCM', 
-                    branches: [[name: '*/main']], 
-                    userRemoteConfigs: [[url: 'https://github.com/spring-projects/spring-petclinic.git']]
-                ])
+                steps {
+                 git branch: "$branch_name", credentialsId: 'trapthygit', url: 'https://github.com/trapthy/multibranch.git'
             }
         }
 
         stage(' Unit Testing') {
+            when {
+                branch "develop"
+            }
             steps {
                 sh """
                 echo "Running Unit Tests"
@@ -43,6 +45,9 @@ pipeline {
         }
 
         stage('Code Analysis') {
+             when {
+                branch "develop"
+            }
             steps {
                 sh """
                 echo "Running Code Analysis"
