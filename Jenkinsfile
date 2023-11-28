@@ -7,7 +7,7 @@ pipeline {
           }
     // environment{
 
-       branch = "${BRANCH_NAME}"
+       branch_name = "${BRANCH_NAME}"
     //     branch = "${env.BRANCH_NAME.split("/")[1]}"
 
 
@@ -21,7 +21,7 @@ pipeline {
                 cleanWs()
                 sh """
               
-                echo $branch
+                echo "$branch_name"
                 echo "Cleaned Up Workspace For Project"
                 """
             }
