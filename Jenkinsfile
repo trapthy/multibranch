@@ -7,7 +7,7 @@ pipeline {
           }
     // environment{
 
-       branch_name = "${BRANCH_NAME}"
+       branch_name = "${env.BRANCH_NAME}"
     //     branch = "${env.BRANCH_NAME.split("/")[1]}"
 
 
