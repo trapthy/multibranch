@@ -20,18 +20,18 @@ pipeline {
             steps {
                 cleanWs()
                 sh """
-               // echo "$branch"
+              
                 printenv
                 echo "Cleaned Up Workspace For Project"
                 """
             }
         }
 
-        stage('Code Checkout') {
-                steps {
-                 git branch: "${env.BRANCH_NAME}", credentialsId: 'trapthygit', url: 'https://github.com/trapthy/multibranch.git'
-            }
-        }
+        // stage('Code Checkout') {
+        //         steps {
+        //          git branch: "${env.BRANCH_NAME}", credentialsId: 'trapthygit', url: 'https://github.com/trapthy/multibranch.git'
+        //     }
+        // }
 
         stage(' Unit Testing') {
             when {
