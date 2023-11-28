@@ -8,7 +8,7 @@ pipeline {
     environment{
 
     //    branch = "${env.BRANCH_NAME}"
-        branch = "${GIT_BRANCH.split("/")[1]}"
+        branch = "${env.BRANCH_NAME.split("/")[1]}"
 
 
     }
