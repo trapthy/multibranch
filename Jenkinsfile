@@ -7,7 +7,8 @@ pipeline {
           }
     environment{
 
-        branch = "${env.BRANCH_NAME}"
+    //    branch = "${env.BRANCH_NAME}"
+        branch = "${GIT_BRANCH.split("/")[1]}"
 
 
     }
@@ -27,7 +28,7 @@ pipeline {
 
         stage('Code Checkout') {
                 steps {
-                 git branch: '$branch', credentialsId: 'trapthygit', url: 'https://github.com/trapthy/multibranch.git'
+                 git branch: "${branch}", credentialsId: 'trapthygit', url: 'https://github.com/trapthy/multibranch.git'
             }
         }
 
