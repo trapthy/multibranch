@@ -6,7 +6,9 @@ pipeline {
              }
           }
     environment{
+
         branch = "${env.BRANCH_NAME}"
+
 
     }
 
