@@ -5,13 +5,13 @@ pipeline {
           label "gp-agent"
              }
           }
-    // environment{
+    environment{
 
        branch_name = "${env.BRANCH_NAME}"
     //     branch = "${env.BRANCH_NAME.split("/")[1]}"
 
 
-    // }
+     }
 
 
     stages {
