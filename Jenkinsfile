@@ -71,12 +71,14 @@ pipeline {
         }
 
           stage('Build Deploy Code to UAT') {
-            when {
-                anyOf{
-                branch "release*'"
-                tag "v*"
-            }
-            }
+              when{ 
+                  buildingTag()
+              }
+            // when {
+                   
+            //         tag pattern: "version*" , comparator: "REGEXP"
+            //     }
+            // }
             steps {
                 sh """
                 echo "Building Artifact"
