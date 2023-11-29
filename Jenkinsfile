@@ -71,8 +71,11 @@ pipeline {
         }
 
           stage('Build Deploy Code to UAT') {
-              when{ 
-                  buildingTag()
+              when{
+                  anyOf{
+                      buildingTag()
+                      branch "release*"
+                  }
               }
             // when {
                    
