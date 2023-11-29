@@ -73,9 +73,9 @@ pipeline {
           stage('Build Deploy Code to UAT') {
             when {
                 anyOf{
-                branch "release*'"
-                tag "v*"
-            }
+                    branch 'release*'
+                    tag 'v*'
+                }
             }
             steps {
                 sh """
