@@ -35,7 +35,7 @@ pipeline {
 
         stage(' Unit Testing') {
             when {
-                branch "develop"
+                branch "feature*"
             }
             steps {
                 sh """
@@ -55,7 +55,7 @@ pipeline {
             }
         }
 
-        stage('Build Deploy Code') {
+        stage('Build Deploy Code to INT') {
             when {
                 branch 'develop'
             }
@@ -66,6 +66,16 @@ pipeline {
 
                 sh """
                 echo "Deploying Code"
+                """
+            }
+        }
+         stage('Build Deploy Code to UAT') {
+             when {
+                branch "release*" | tag "v*"
+            }
+            steps {
+                sh """
+                echo "Deploying Code to UAT"
                 """
             }
         }
