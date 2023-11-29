@@ -73,7 +73,7 @@ pipeline {
           stage('Build Deploy Code to UAT') {
             when {
                    
-                    tag "v*"
+                    tag pattern: "version*" , comparator: "REGEXP"
                 }
             }
             steps {
