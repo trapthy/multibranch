@@ -77,7 +77,7 @@ pipeline {
               when{
                   anyOf{
                       buildingTag()
-                      branch "release*"
+                      branch '$branch_name'
                   }
               }
             // when {
