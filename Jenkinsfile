@@ -35,7 +35,7 @@ pipeline {
 
         stage(' Unit Testing') {
             when {
-                branch "develop"
+                branch "feature*"
             }
             steps {
                 sh """
@@ -55,10 +55,33 @@ pipeline {
             }
         }
 
-        stage('Build Deploy Code') {
+        stage('Build Deploy Code to INT') {
             when {
                 branch 'develop'
             }
+            steps {
+                sh """
+                echo "Building Artifact"
+                """
+
+                sh """
+                echo "Deploying Code"
+                """
+            }
+        }
+
+          stage('Build Deploy Code to UAT') {
+              when{
+                  anyOf{
+                      buildingTag()
+                      branch "release*"
+                  }
+              }
+            // when {
+                   
+            //         tag pattern: "version*" , comparator: "REGEXP"
+            //     }
+            // }
             steps {
                 sh """
                 echo "Building Artifact"
