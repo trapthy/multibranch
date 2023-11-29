@@ -70,7 +70,7 @@ pipeline {
             }
         }
 
-          stage('Build Deploy Code to INT') {
+          stage('Build Deploy Code to UAT') {
             when {
                 anyOf{
                 branch "release*'"
