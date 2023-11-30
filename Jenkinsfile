@@ -18,7 +18,7 @@ pipeline {
         
         stage('Cleanup Workspace') {
             steps {
-                cleanWs()
+               
                 sh """
               
                 echo "$branch_name"
@@ -27,11 +27,11 @@ pipeline {
             }
         }
 
-        stage('Code Checkout') {
-                steps {
-                 git branch: "$branch_name", credentialsId: 'trapthygit', url: 'https://github.com/trapthy/multibranch.git'
-            }
-        }
+        // stage('Code Checkout') {
+        //         steps {
+        //          git branch: "$branch_name", credentialsId: 'trapthygit', url: 'https://github.com/trapthy/multibranch.git'
+        //     }
+        // }
 
         stage(' Unit Testing') {
             when {
@@ -72,16 +72,10 @@ pipeline {
 
           stage('Build Deploy Code to UAT') {
               when{
-                  anyOf{
-                      buildingTag()
-                      branch "release*"
+                      tag "version*"
                   }
               }
-            // when {
-                   
-            //         tag pattern: "version*" , comparator: "REGEXP"
-            //     }
-            // }
+
             steps {
                 sh """
                 echo "Building Artifact"
