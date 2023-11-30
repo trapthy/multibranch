@@ -58,7 +58,7 @@ pipeline {
 
         stage('Build Deploy Code to INT') {
             when {
-                branch 'develop'
+                branch "develop"
             }
             steps {
                 sh """
@@ -73,7 +73,7 @@ pipeline {
 
           stage('Build Deploy Code to UAT') {
               when{
-                  tag 'version*'
+                  tag "version*"
                      // buildingTag()
                     
                  
