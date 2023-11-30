@@ -8,6 +8,7 @@ pipeline {
     environment{
 
        branch_name = "${env.BRANCH_NAME}"
+      
     //     branch = "${env.BRANCH_NAME.split("/")[1]}"
 
 
@@ -20,7 +21,7 @@ pipeline {
             steps {
                
                 sh """
-              
+                printenv
                 echo "$branch_name"
                 echo "Cleaned Up Workspace For Project"
                 """
@@ -72,9 +73,10 @@ pipeline {
 
           stage('Build Deploy Code to UAT') {
               when{
+
                       tag "version*"
                   }
-              }
+
 
             steps {
                 sh """
