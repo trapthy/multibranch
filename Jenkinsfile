@@ -9,8 +9,6 @@ pipeline {
 
        branch_name = "${env.BRANCH_NAME}"
       
-        GIT_TAG = sh(returnStdout: true, script: 'git describe --always').trim()
-    
     //     branch = "${env.BRANCH_NAME.split("/")[1]}"
 
 
@@ -23,7 +21,7 @@ pipeline {
             steps {
                 cleanWs()
                 sh """
-                echo $GIT_TAG
+                
                 echo "$branch_name"
                 echo "Cleaned Up Workspace For Project"
                 """
@@ -74,8 +72,11 @@ pipeline {
         }
 
           stage('Build Deploy Code to UAT') {
-              when{ 
-                  buildingTag()
+              when{
+                 
+                      buildingTag()
+                    
+                 
               }
             // when {
                    
