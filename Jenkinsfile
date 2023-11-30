@@ -22,7 +22,10 @@ pipeline {
                 cleanWs()
                 sh """
                 printenv
+                pwd
                 ls -lrt
+                cd ${env.WORKSPACE_TMP} && ls -lrt
+                
                 echo "$branch_name"
                 echo "Cleaned Up Workspace For Project"
                 """
