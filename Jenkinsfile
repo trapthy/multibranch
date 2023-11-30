@@ -21,7 +21,7 @@ pipeline {
             steps {
                 cleanWs()
                 sh """
-                
+                printenv
                 echo "$branch_name"
                 echo "Cleaned Up Workspace For Project"
                 """
