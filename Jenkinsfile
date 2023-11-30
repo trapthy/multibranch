@@ -8,6 +8,7 @@ pipeline {
     environment{
 
        branch_name = "${env.BRANCH_NAME}"
+      
     //     branch = "${env.BRANCH_NAME.split("/")[1]}"
 
 
@@ -18,20 +19,20 @@ pipeline {
         
         stage('Cleanup Workspace') {
             steps {
-                cleanWs()
+               
                 sh """
-              
+                printenv
                 echo "$branch_name"
                 echo "Cleaned Up Workspace For Project"
                 """
             }
         }
 
-        stage('Code Checkout') {
-                steps {
-                 git branch: "$branch_name", credentialsId: 'trapthygit', url: 'https://github.com/trapthy/multibranch.git'
-            }
-        }
+        // stage('Code Checkout') {
+        //         steps {
+        //          git branch: "$branch_name", credentialsId: 'trapthygit', url: 'https://github.com/trapthy/multibranch.git'
+        //     }
+        // }
 
         stage(' Unit Testing') {
             when {
@@ -72,16 +73,11 @@ pipeline {
 
           stage('Build Deploy Code to UAT') {
               when{
-                  anyOf{
-                      buildingTag()
-                      branch "release*"
+
+                      tag "version*"
                   }
-              }
-            // when {
-                   
-            //         tag pattern: "version*" , comparator: "REGEXP"
-            //     }
-            // }
+
+
             steps {
                 sh """
                 echo "Building Artifact"
