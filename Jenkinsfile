@@ -73,8 +73,8 @@ pipeline {
 
           stage('Build Deploy Code to UAT') {
               when{
-                 
-                      buildingTag()
+                  tag 'version*'
+                     // buildingTag()
                     
                  
               }
