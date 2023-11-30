@@ -19,7 +19,7 @@ pipeline {
         
         stage('Cleanup Workspace') {
             steps {
-                cleanWs()
+                
                 sh """
                 printenv
                 pwd
