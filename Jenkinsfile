@@ -1,10 +1,11 @@
 pipeline {
 
-    agent {
-        label {
-          label "gp-agent"
-             }
-          }
+    agent any
+    //{
+        // label {
+        //   label "gp-agent"
+        //      }
+        //   }
     environment{
 
        branch_name = "${env.BRANCH_NAME}"
