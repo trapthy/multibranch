@@ -98,7 +98,7 @@ pipeline {
                         
                         }
                 }
-            }
+            
         stage('Build Deploy Code to INT') {
             when {
                 branch 'develop'
