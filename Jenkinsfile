@@ -5,7 +5,7 @@ pipeline {
     environment{
 
        branch_name = "${env.BRANCH_NAME}"
-       gitcred = credentials('trapthygit')
+       gitcred = credentials('gitsshkey')
       
     //     branch = "${env.BRANCH_NAME.split("/")[1]}"
 
@@ -77,7 +77,7 @@ pipeline {
           steps {
                 script {
                   
-                    git branch: "${env.BRANCH_NAME}", credentialsId: "${gitcred}", url: "https://github.com/trapthy/multibranch.git"
+                    git branch: "${env.BRANCH_NAME}", credentialsId: "${gitcred}", url: "git@github.com:trapthy/multibranch.git"
                     env.GIT_COMMIT = sh(script: 'git rev-parse HEAD', returnStdout: true)?.trim()
                     echo "Commit ID for this Build is : $env.GIT_COMMIT"
                  
