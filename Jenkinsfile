@@ -5,7 +5,7 @@ pipeline {
     environment{
 
        branch_name = "${env.BRANCH_NAME}"
-       gitcred = credentials('trapthygit')
+       gitcred = "gitsshkey"
       
     //     branch = "${env.BRANCH_NAME.split("/")[1]}"
 
@@ -77,7 +77,7 @@ pipeline {
           steps {
                 script {
                   
-                    git branch: "${env.BRANCH_NAME}", credentialsId: "${gitcred}", url: "https://github.com/trapthy/multibranch.git"
+                    git branch: "${env.BRANCH_NAME}", credentialsId: "${gitcred}", url: "git@github.com:trapthy/multibranch.git"
                     env.GIT_COMMIT = sh(script: 'git rev-parse HEAD', returnStdout: true)?.trim()
                     echo "Commit ID for this Build is : $env.GIT_COMMIT"
                  
@@ -89,13 +89,18 @@ pipeline {
                 branch "develop"
             }
             steps {
-               
-                        sh """
-                        echo "************Tag creation"
+               	sshagent(credentials: ['gitsshkey']) { 
+			echo "************Tag creation"
+			echo "$env.GIT_COMMIT"
+                        sh label: 'Tag creation', script: '''#!/bin/bash
+                      
+			git config --global user.email "trapthyshetty@gmail.com	"
+                        git config --global user.name "trapthyshetty"
                         
-                        git tag -a ver1.0 $env.GIT_COMMIT -m "create tag"
-                        """  
-                            
+                        git tag -a ver1.6 $GIT_COMMIT -m "create tag"
+			git tag --list
+                        git push origin ver1.6 ''' 
+				}  
                         
                         }
                 }
