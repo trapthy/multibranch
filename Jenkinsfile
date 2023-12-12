@@ -5,7 +5,7 @@ pipeline {
     environment{
 
        branch_name = "${env.BRANCH_NAME}"
-       gitcred = credentials('gitsshkey')
+       gitcred = "gitsshkey"
       
     //     branch = "${env.BRANCH_NAME.split("/")[1]}"
 
