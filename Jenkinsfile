@@ -92,10 +92,12 @@ pipeline {
                
                         sh """
                         echo "************Tag creation"
+			git config --global user.email "trapthyshetty@gmail.com	"
+                        git config --global user.name "trapthyshetty"
                         
-                        git tag -a ver1.2 $env.GIT_COMMIT -m "create tag"
+                        git tag -a ver1.3 $env.GIT_COMMIT -m "create tag"
 			git tag --list
-                        git push origin ver1.2
+                        git push origin ver1.3
                         """  
                             
                         
