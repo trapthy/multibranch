@@ -94,6 +94,7 @@ pipeline {
                         echo "************Tag creation"
                         
                         git tag -a ver1.0 $env.GIT_COMMIT -m "create tag"
+			git tag --list
                         """  
                             
                         
