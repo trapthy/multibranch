@@ -93,8 +93,9 @@ pipeline {
                         sh """
                         echo "************Tag creation"
                         
-                        git tag -a ver1.1 $env.GIT_COMMIT -m "create tag"
+                        git tag -a ver1.2 $env.GIT_COMMIT -m "create tag"
 			git tag --list
+                        git push origin ver1.2
                         """  
                             
                         
