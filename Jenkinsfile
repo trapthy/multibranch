@@ -97,7 +97,7 @@ pipeline {
 			git config --global user.email "trapthyshetty@gmail.com	"
                         git config --global user.name "trapthyshetty"
                         
-                        git tag -a ver1.6 $env.GIT_COMMIT -m "create tag"
+                        git tag -a ver1.6 "${env.GIT_COMMIT}" -m "create tag"
 			git tag --list
                         git push origin ver1.6 ''' 
 				}  
