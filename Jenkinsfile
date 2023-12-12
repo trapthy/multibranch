@@ -90,14 +90,15 @@ pipeline {
             }
             steps {
                	sshagent(credentials: ['gitsshkey']) { 
+			echo "************Tag creation"
                         sh label: 'Tag creation', script: '''#!/bin/bash
-                        echo "************Tag creation"
+                      
 			git config --global user.email "trapthyshetty@gmail.com	"
                         git config --global user.name "trapthyshetty"
                         
-                        git tag -a ver1.5 $env.GIT_COMMIT -m "create tag"
+                        git tag -a ver1.6 $env.GIT_COMMIT -m "create tag"
 			git tag --list
-                        git push origin ver1.5 ''' 
+                        git push origin ver1.6 ''' 
 				}  
                         
                         }
