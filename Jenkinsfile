@@ -67,7 +67,7 @@ pipeline {
                     
                  
                         timeout(time: 2, unit: "DAYS") {
-	                     input message: "Do you want to approve the tag creation on Integration?", ok: 'Yes'
+	                input message: "Do you want to approve the tag creation on Integration?", ok: 'Yes'
                             
                         }
                         }
@@ -93,7 +93,7 @@ pipeline {
                         sh """
                         echo "************Tag creation"
                         
-                        git tag -a ver1.0 env.GIT_COMMIT -m "create tag"
+                        git tag -a ver1.0 $env.GIT_COMMIT -m "create tag"
                         """  
                             
                         
